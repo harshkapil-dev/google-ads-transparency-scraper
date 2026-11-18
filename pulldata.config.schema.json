@@ -1,0 +1,117 @@
+{
+  "fields": [
+    {
+      "key": "query",
+      "label": "Advertiser name, domain, or ID",
+      "type": "text",
+      "required": true,
+      "placeholder": "nike.com",
+      "order": 1
+    },
+    {
+      "key": "region",
+      "label": "Ad delivery region",
+      "type": "select",
+      "required": false,
+      "defaultValue": "ALL",
+      "options": [
+        {
+          "label": "All regions",
+          "value": "ALL"
+        },
+        {
+          "label": "United States",
+          "value": "US"
+        },
+        {
+          "label": "United Kingdom",
+          "value": "GB"
+        },
+        {
+          "label": "Canada",
+          "value": "CA"
+        },
+        {
+          "label": "Australia",
+          "value": "AU"
+        },
+        {
+          "label": "Germany",
+          "value": "DE"
+        },
+        {
+          "label": "France",
+          "value": "FR"
+        },
+        {
+          "label": "India",
+          "value": "IN"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "key": "max_total_results",
+      "label": "Maximum results",
+      "type": "number",
+      "required": false,
+      "defaultValue": 20,
+      "min": 1,
+      "max": 100,
+      "order": 3
+    }
+  ],
+  "resultsSchema": {
+    "columns": [
+      {
+        "key": "advertiser_id",
+        "label": "Advertiser ID",
+        "type": "string"
+      },
+      {
+        "key": "advertiser_name",
+        "label": "Advertiser name",
+        "type": "string"
+      },
+      {
+        "key": "creative_id",
+        "label": "Creative ID",
+        "type": "string"
+      },
+      {
+        "key": "ad_url",
+        "label": "Ad Transparency Center URL",
+        "type": "url"
+      },
+      {
+        "key": "ad_format_code",
+        "label": "Google ad format code",
+        "type": "integer"
+      },
+      {
+        "key": "first_shown_at",
+        "label": "First shown",
+        "type": "datetime"
+      },
+      {
+        "key": "last_shown_at",
+        "label": "Last shown",
+        "type": "datetime"
+      },
+      {
+        "key": "advertiser_domain",
+        "label": "Advertiser domain",
+        "type": "string"
+      },
+      {
+        "key": "region",
+        "label": "Search region",
+        "type": "string"
+      }
+    ],
+    "exportFormats": [
+      "CSV",
+      "JSON"
+    ]
+  }
+}

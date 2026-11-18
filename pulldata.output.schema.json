@@ -1,0 +1,53 @@
+{
+  "columns": [
+    {
+      "key": "advertiser_id",
+      "label": "Advertiser ID",
+      "type": "string"
+    },
+    {
+      "key": "advertiser_name",
+      "label": "Advertiser name",
+      "type": "string"
+    },
+    {
+      "key": "creative_id",
+      "label": "Creative ID",
+      "type": "string"
+    },
+    {
+      "key": "ad_url",
+      "label": "Ad Transparency Center URL",
+      "type": "url"
+    },
+    {
+      "key": "ad_format_code",
+      "label": "Google ad format code",
+      "type": "integer"
+    },
+    {
+      "key": "first_shown_at",
+      "label": "First shown",
+      "type": "datetime"
+    },
+    {
+      "key": "last_shown_at",
+      "label": "Last shown",
+      "type": "datetime"
+    },
+    {
+      "key": "advertiser_domain",
+      "label": "Advertiser domain",
+      "type": "string"
+    },
+    {
+      "key": "region",
+      "label": "Search region",
+      "type": "string"
+    }
+  ],
+  "exportFormats": [
+    "CSV",
+    "JSON"
+  ]
+}
