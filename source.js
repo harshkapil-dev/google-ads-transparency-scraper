@@ -53,6 +53,8 @@ async function rpc(method, payload, context) {
     const proxy = proxyClient(context.env || {});
     if (!proxy) throw error;
     try {
+      // Direct retries can consume most of the lease before the proxy starts.
+      await context.checkpoint({});
       return await requestJson(url, options, context.signal, { fetcher: proxy.fetcher, attempts: 2 });
     } finally { await proxy.close(); }
   }
