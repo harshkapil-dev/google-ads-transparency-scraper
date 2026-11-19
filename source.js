@@ -1,4 +1,5 @@
 import { domainToASCII } from "node:url";
+import { proxyClient } from "./proxy.js";
 import { requestJson, resultLimit, WorkerError } from "./upstream.js";
 
 const origin = "https://adstransparency.google.com";
@@ -38,12 +39,23 @@ function rowsFrom(response) {
   return response["1"] || [];
 }
 
-function rpc(method, payload, context) {
-  return requestJson(`${origin}/anji/_/rpc/SearchService/${method}`, {
+async function rpc(method, payload, context) {
+  const url = `${origin}/anji/_/rpc/SearchService/${method}`;
+  const options = {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded", accept: "application/json" },
     body: new URLSearchParams({ "f.req": JSON.stringify(payload) }),
-  }, context.signal, { fetcher: context.fetcher });
+  };
+  try {
+    return await requestJson(url, options, context.signal, { fetcher: context.fetcher });
+  } catch (error) {
+    if (!(error instanceof WorkerError) || ![502, 503, 504].includes(error.status)) throw error;
+    const proxy = proxyClient(context.env || {});
+    if (!proxy) throw error;
+    try {
+      return await requestJson(url, options, context.signal, { fetcher: proxy.fetcher, attempts: 2 });
+    } finally { await proxy.close(); }
+  }
 }
 
 function normalizeName(name) {
